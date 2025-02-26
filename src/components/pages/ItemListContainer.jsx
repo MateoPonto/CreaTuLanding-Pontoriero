@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { products } from "../../../products";
 import { ProductCard } from "../../common/productCard/ProductCard";
-import { useParams } from "react-router-dom"; // CORREGIDO: Debe ser "react-router-dom"
+import { useParams } from "react-router";
 
 export const ItemListContainer = () => {
   const [items, setItems] = useState([]);
-  const { name } = useParams();
+  const { name } = useParams(); // {x: 1, b: 2 } {}.c ---> undefined
+
+  // undefined ---> home ---> ver todos
+  // string ----> categoria --> quiero filtrar
 
   useEffect(() => {
     const getProducts = new Promise((resolve, reject) => {
@@ -17,7 +20,7 @@ export const ItemListContainer = () => {
             : products
         );
       } else {
-        reject({ message: "error", status: 400 });
+        reject({ message: "algo salio mal", status: 400 });
       }
     });
 
@@ -27,15 +30,11 @@ export const ItemListContainer = () => {
   }, [name]);
 
   return (
-    <section className="container my-4">
-      <h2 className="text-center mb-4">Mis Productos</h2>
-      <div className="row">
-        {items.map((item) => (
-          <div key={item.id} className="col-md-4 col-lg-3 mb-4">
-            <ProductCard item={item} />
-          </div>
-        ))}
-      </div>
+    <section>
+      <h2>Mis productos</h2>
+      {items.map((item) => {
+        return <ProductCard key={item.id} item={item} />;
+      })}
     </section>
   );
 };
