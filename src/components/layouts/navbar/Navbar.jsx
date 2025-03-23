@@ -35,7 +35,9 @@ export const Navbar = () => {
               </Link>
             </li>
           </ul>
-          <CartWidget />
+          <Link to="/cart" style={{ textDecoration: "none", color: "white" }}>
+            <CartWidget />
+          </Link>
         </div>
       </div>
     </nav>

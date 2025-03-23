@@ -1,5 +1,5 @@
 export const products = [
-  {
+  /*{
     id: "1",
     title: "Smartphone X100",
     price: 899,
@@ -9,9 +9,9 @@ export const products = [
     category: "electronica",
     imageUrl:
       "https://tienda.movistar.com.ar/media/catalog/product/cache/1d01ed3f1ecf95fcf479279f9ae509ad/s/a/samsung-a15-yellow-front_2.png",
-  },
+  },*/
   {
-    id: "2",
+    //id: "2",
     title: "Auriculares Inalámbricos Pro",
     price: 199,
     stock: 120,
@@ -22,7 +22,7 @@ export const products = [
       "https://acdn-us.mitiendanube.com/stores/001/593/734/products/ng-a100bt-rj-angulo-554a80fc2c8cfb6e8316986747330025-1024-1024.webp",
   },
   {
-    id: "3",
+    //id: "3",
     title: "Laptop Ultrabook Z",
     price: 1299,
     stock: 30,
@@ -33,7 +33,7 @@ export const products = [
       "https://media.istockphoto.com/id/1394988455/es/foto/port%C3%A1til-con-pantalla-en-blanco-sobre-fondo-blanco.jpg?s=612x612&w=0&k=20&c=9bGhsdR3oYjaqMSRSKHScOQmSAmJZOjsWc8nQKPkvXU=",
   },
   {
-    id: "4",
+    //id: "4",
     title: "Smartwatch Fit 3",
     price: 149,
     stock: 75,

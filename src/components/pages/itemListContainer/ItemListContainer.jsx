@@ -1,41 +1,39 @@
 import { useEffect, useState } from "react";
-import { products } from "../../../products";
+
 import { ProductCard } from "../../common/productCard/ProductCard";
-import { useParams } from "react-router-dom"; // CORREGIDO: Debe ser "react-router-dom"
+import { useParams } from "react-router";
+import { db } from "../../../firebaseConfig";
+
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 export const ItemListContainer = () => {
   const [items, setItems] = useState([]);
   const { name } = useParams();
 
   useEffect(() => {
-    const getProducts = new Promise((resolve, reject) => {
-      let isAdmin = true;
-      if (isAdmin) {
-        resolve(
-          name
-            ? products.filter((elemento) => elemento.category === name)
-            : products
-        );
-      } else {
-        reject({ message: "error", status: 400 });
-      }
-    });
+    let refCollection = collection(db, "products");
+    let consulta = refCollection;
+    if (name) {
+      consulta = query(refCollection, where("category", "==", name));
+    }
+    const getProducts = getDocs(consulta);
 
     getProducts
-      .then((res) => setItems(res))
+      .then((res) => {
+        const nuevoArray = res.docs.map((elemento) => {
+          return { id: elemento.id, ...elemento.data() };
+        });
+        setItems(nuevoArray);
+      })
       .catch((error) => console.log(error));
   }, [name]);
 
   return (
-    <section className="container my-4">
-      <h2 className="text-center mb-4">Mis Productos</h2>
-      <div className="row">
-        {items.map((item) => (
-          <div key={item.id} className="col-md-4 col-lg-3 mb-4">
-            <ProductCard item={item} />
-          </div>
-        ))}
-      </div>
+    <section>
+      <h2>Mis productos</h2>
+      {items.map((item) => {
+        return <ProductCard key={item.id} item={item} />;
+      })}
     </section>
   );
 };
